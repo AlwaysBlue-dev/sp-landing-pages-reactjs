@@ -39,7 +39,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container-fluid nav-container">
-        <Link to="/" className="navbar-brand nav-brand">
+        <Link to={dashboardPath} className="navbar-brand nav-brand">
           <img src={logo} className="nav-logo img-fluid" alt={`${title} Logo`} />
           {title}
         </Link>
