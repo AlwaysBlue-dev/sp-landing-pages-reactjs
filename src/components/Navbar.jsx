@@ -21,7 +21,7 @@ export default function Navbar({ logo, name, currentPage }) {
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container-fluid nav-container">
-        <Link to={`/${currentPage}`} className="navbar-brand nav-brand">
+        <Link to={dashboardPath} className="navbar-brand nav-brand">
           <img src={logo} className="nav-logo img-fluid" alt={`${name} Logo`} />
           <span className='ms-3 text-uppercase'>{name}</span>
         </Link>
