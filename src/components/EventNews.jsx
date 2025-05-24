@@ -1,50 +1,14 @@
-import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { pageData } from '../data/pageConfig';
 
-function DashboardNewsEvents() {
-  const newsItems = [
-    {
-      date: 'Oct 15',
-      title: "CEO's Quarterly Vision Update",
-      excerpt: 'Our leadership team shares exciting new initiatives and strategic direction for Q4, including expansion into new markets and innovative technology investments.',
-    },
-    {
-      date: 'Oct 12',
-      title: 'New Hybrid Work Policy',
-      excerpt: 'Updated flexible work guidelines take effect next month, offering enhanced work-life balance options and collaborative workspace improvements.',
-    },
-    {
-      date: 'Oct 8',
-      title: 'Safety Protocol Updates',
-      excerpt: 'Important updates to our safety procedures across all divisions to ensure continued compliance and employee wellbeing.',
-    },
-  ];
-
-  const eventItems = [
-    {
-      day: '25',
-      month: 'OCT',
-      title: 'All-Hands Meeting',
-      description: 'Quarterly company update and Q&A session',
-    },
-    {
-      day: '05',
-      month: 'NOV',
-      title: 'Safety Training',
-      description: 'Mandatory safety certification renewal',
-    },
-    {
-      day: '18',
-      month: 'NOV',
-      title: 'Team Building Event',
-      description: 'Annual company retreat and activities',
-    },
-    {
-      day: '25',
-      month: 'DEC',
-      title: 'Holiday Closure',
-      description: 'Christmas Day - Office closed',
-    },
-  ];
+function EventNews() {
+  const location = useLocation();
+  const pathParts = location.pathname.split('/');
+  const subsidiary = pathParts[1] || 'austen-main';
+  const currentPage = subsidiary === '' ? 'austen-main' : subsidiary;
+  const data = pageData[currentPage] || pageData['austen-main'];
+  const newsItems = data.announcements || [];
+  const eventItems = data.eventNews || [];
 
   return (
     <section className="dashboard row g-4 my-5">
@@ -61,11 +25,11 @@ function DashboardNewsEvents() {
             {newsItems.map((item, index) => (
               <div key={index} className="news-item">
                 <div className="news-meta">
-                  <div className="news-date">{item.date}</div>
+                  <div className="news-date">{item.date || 'N/A'}</div>
                 </div>
                 <div>
                   <h3 className="news-title">{item.title}</h3>
-                  <p className="news-excerpt">{item.excerpt}</p>
+                  <p className="news-excerpt">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -102,4 +66,4 @@ function DashboardNewsEvents() {
   );
 }
 
-export default DashboardNewsEvents;
+export default EventNews;
